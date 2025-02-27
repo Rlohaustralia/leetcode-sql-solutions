@@ -1,0 +1,13 @@
+# Write your MySQL query statement below
+
+SELECT
+    SUBSTRING(trans_date, 1, 7) AS month, # YYYY-MM 형식의 month 컬럼을 생성
+    country,
+    COUNT(id) AS trans_count,
+    SUM(state = 'approved') AS approved_count,
+    SUM(amount) AS trans_total_amount,
+    SUM((state = 'approved') * amount) AS approved_total_amount
+FROM
+    Transactions
+GROUP BY # 중복되는 것들끼리 묶어서 정리
+    month, country;
